@@ -2,7 +2,6 @@
 using HackathonClient.MVVM.View;
 using Newtonsoft.Json;
 using SharedLibrary;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,7 +21,7 @@ namespace HackathonClient.MVVM.ViewModel
 
         public ObservableCollection<SessionData> Sessions
         {
-            get { return _sessions; }
+            get => _sessions;
             set
             {
                 _sessions = value;
@@ -31,7 +30,7 @@ namespace HackathonClient.MVVM.ViewModel
         }
         public ICollectionView SessionsView
         {
-            get { return _sessionsView; }
+            get => _sessionsView;
             set
             {
                 _sessionsView = value;
@@ -41,7 +40,7 @@ namespace HackathonClient.MVVM.ViewModel
 
         public SessionData SelectedSesseion
         {
-            get { return _selectedSesseion; }
+            get => _selectedSesseion;
             set
             {
                 _selectedSesseion = value;
@@ -65,7 +64,6 @@ namespace HackathonClient.MVVM.ViewModel
                     return false;
                 };
                 SessionsView.Refresh();
-
             }
         }
 
@@ -153,7 +151,6 @@ namespace HackathonClient.MVVM.ViewModel
                             AddAsync(vm.SessionData);
                             Sessions.Add(vm.SessionData);
                             SelectedSesseion = Sessions.Last();
-                            
                         }
                     }));
             }
@@ -207,7 +204,6 @@ namespace HackathonClient.MVVM.ViewModel
                             if (vm.SessionData.Agent.EnvironmentId == null) vm.SessionData.Agent.EnvironmentId = "";
                             if (vm.SessionData.Agent.IsotopeEnvironment == null) vm.SessionData.Agent.IsotopeEnvironment = "";
 
-
                             AddAsync(vm.SessionData);
                         }
                     }
@@ -233,9 +229,8 @@ namespace HackathonClient.MVVM.ViewModel
                     }));
             }
         }
-
-
         #endregion
+
         public SessionsViewModel()
         {
             #region Adds
@@ -320,15 +315,10 @@ namespace HackathonClient.MVVM.ViewModel
             Sessions = new ObservableCollection<SessionData>();
             RefreshAsync();
             SessionsView = CollectionViewSource.GetDefaultView(Sessions);
-
-            
-
         }
-
 
         public async Task RefreshAsync()
         {
-            
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync("https://a6337-c1ef.k.d-f.pw/Session/All");
@@ -339,12 +329,10 @@ namespace HackathonClient.MVVM.ViewModel
                 {
                     Sessions.Add(session);
                 }
-
             }
         }
         public async Task AddAsync(SessionData result)
         {
-
             using (HttpClient client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(result);
@@ -352,6 +340,5 @@ namespace HackathonClient.MVVM.ViewModel
                 var response = await client.PostAsync("https://a6337-c1ef.k.d-f.pw/Add", content);
             }
         }
-
     }
 }

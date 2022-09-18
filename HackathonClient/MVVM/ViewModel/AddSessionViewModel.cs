@@ -1,12 +1,5 @@
 ﻿using HackathonClient.Core;
-using Newtonsoft.Json;
 using SharedLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HackathonClient.MVVM.ViewModel
@@ -16,10 +9,7 @@ namespace HackathonClient.MVVM.ViewModel
         private SessionData _sessionData;
         public SessionData SessionData
         {
-            get
-            {
-                return _sessionData;
-            }
+            get => _sessionData;
             set
             {
                 _sessionData = value;
@@ -41,16 +31,11 @@ namespace HackathonClient.MVVM.ViewModel
                         {
                             w.DialogResult = true;
                             w.Close();
-                            
                         }
                     }));
             }
         }
         #endregion
-        public AddSessionViewModel()
-        {
-        }
+        public AddSessionViewModel() { }
     }
-
-
 }

@@ -1,39 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace HackathonClient.Core
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : Command
     {
-        private Action<object> execute;
-        private Func<object, bool> canExecute;
+        private Action<object> _Execute;
+        private Func<object, bool> _CanExecute;
 
-        public event EventHandler CanExecuteChanged
+        public RelayCommand(Action<object> Execute, Func<object, bool> CanExecute = null)
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            _Execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _CanExecute = CanExecute;
         }
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        {
-            this.execute = execute;
-            this.canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return this.canExecute == null || this.canExecute(parameter);
-        }
-
-        public void Execute(object parameter)
-        {
-            this.execute(parameter);
-        }
-
-
+        public override void Execute(object? parameter) => _Execute(parameter);
+        public override bool CanExecute(object? parameter) => _CanExecute?.Invoke(parameter) ?? true;
     }
 }

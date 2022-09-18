@@ -1,9 +1,6 @@
 ﻿using HackathonClient.Core;
 using Newtonsoft.Json;
 using SharedLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +15,7 @@ namespace HackathonClient.MVVM.ViewModel
         private string? _email;
         public int? StartNumber
         {
-            get { return _startNumber; }
+            get => _startNumber;
             set
             {
                 _startNumber = value;
@@ -27,7 +24,7 @@ namespace HackathonClient.MVVM.ViewModel
         }
         public int? EndNumber
         {
-            get { return _endNumber; }
+            get => _endNumber;
             set
             {
                 _endNumber = value;
@@ -36,7 +33,7 @@ namespace HackathonClient.MVVM.ViewModel
         }
         public string Email
         {
-            get { return _email; }
+            get => _email;
             set
             {
                 _email = value;
@@ -78,13 +75,9 @@ namespace HackathonClient.MVVM.ViewModel
             }
         }
         #endregion
-        public ReportSessionViewModel()
-        {
-
-        }
+        public ReportSessionViewModel() { }
         public async Task SendAsync(ReportHelper result)
         {
-
             using (HttpClient client = new HttpClient())
             {
                 var content = new StringContent(JsonConvert.SerializeObject(result), Encoding.UTF8, "application/json");

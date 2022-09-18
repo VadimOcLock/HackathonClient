@@ -70,12 +70,12 @@ namespace HackathonClient.MVVM.ViewModel
 
                             }
                         }
-
                     }));
             }
         }
         #endregion
         public ReportSessionViewModel() { }
+
         public async Task SendAsync(ReportHelper result)
         {
             using (HttpClient client = new HttpClient())

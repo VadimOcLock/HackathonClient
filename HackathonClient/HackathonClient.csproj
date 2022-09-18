@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="Images\Screens\" />
     <Folder Include="MVVM\Model\" />
   </ItemGroup>
 
